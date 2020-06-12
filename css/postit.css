@@ -1,0 +1,49 @@
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+.container{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    background-image: url("../img/bck.jpg");
+    background-size: cover;
+}
+
+.sideNav{
+    width: 20%;
+    height: 100%;
+    background-image: url("../img/sideBck.jpg");
+    background-size: cover;
+    border-right: 2px solid grey;
+    z-index: 1;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+#postitVert{
+    height: 300px;
+    width: 300px;
+    background-color: #04B45F;
+    border: 1px solid white;
+    z-index: 8;
+}
+
+#postitRouge{
+    height: 300px;
+    width: 300px;
+    background-color: #cf1818;
+    border: 1px solid white;
+    z-index: 8;
+}
+
+#postitBleu{
+    height: 300px;
+    width: 300px;
+    background-color: #354cb4;
+    border: 1px solid white;
+    z-index: 8;
+}
