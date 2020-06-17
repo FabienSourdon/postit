@@ -63,13 +63,13 @@ class postit{
             //Creation du bouton move
             let imgMove = document.createElement('img');
             imgMove.src = "./img/move.svg";
-            imgMove.style.height = "30px";
-            imgMove.style.width = "30px";
+            imgMove.style.height = "20px";
+            imgMove.style.width = "20px";
 
             let btnMove = document.createElement('button');
             btnMove.id = "btnMove"+parseInt(this.Ident++);
-            btnMove.style.height = "30px";
-            btnMove.style.width = "30px";
+            btnMove.style.height = "20px";
+            btnMove.style.width = "20px";
             btnMove.style.border = "none";
             btnMove.style.backgroundColor = this.CouleurFond;
             btnMove.style.marginLeft = "5px";
@@ -82,8 +82,8 @@ class postit{
                 btnMove.addEventListener('dragstart', function(e){
                     isDown = true;
                     offset = [
-                        containPost.offsetLeft - e.clientX,
-                        containPost.offsetTop - e.clientY
+                        containPost.offsetLeft - mouseX,
+                        containPost.offsetTop - mouseY
                     ];
                 });
 
@@ -95,41 +95,47 @@ class postit{
 
                 btnMove.addEventListener('drag', function(event) {
                     event.preventDefault();
-                    if (isDown) {
-                        mousePosition = {
-            
-                        x : event.clientX,
-                        y : event.clientY
-            
-                        };
-                    containPost.style.left = (mousePosition.x + offset[0]) + 'px';
-                    containPost.style.top  = (mousePosition.y + offset[1]) + 'px';
-                }
+                        if (isDown) {
+                            mousePosition = {
+                
+                            x : mouseX,
+                            y : mouseY
+                
+                            };
+                        containPost.style.left = (mousePosition.x + offset[0]) + 'px';
+                        containPost.style.top  = (mousePosition.y + offset[1]) + 'px';
+                        }
+                
+                    
+                console.log('x: ',offset[0], mousePosition.x, event.clientX, 'y: ',offset[1], mousePosition.y, event.clientY, 'long: ',containPost.style.left, 'larg: ', containPost.style.top);
                 });
 
             //Creation du bouton delete
             let imgDel = document.createElement('img');
             imgDel.src = "./img/delete.svg";
-            imgDel.style.height = "30px";
-            imgDel.style.width = "30px";
+            imgDel.style.height = "20px";
+            imgDel.style.width = "20px";
 
             let btnDel = document.createElement('button');
-            btnDel.style.height = "30px";
-            btnDel.style.width = "30px";
+            btnDel.style.height = "20px";
+            btnDel.style.width = "20px";
             btnDel.style.border = "none";
             btnDel.style.backgroundColor = this.CouleurFond;
             btnDel.style.marginLeft = "5px";
+            btnDel.addEventListener('click', function(e){
+                divContainer.removeChild(containPost);
+            })
 
             //Creation du bouton resize
             let imgResize = document.createElement('img');
             imgResize.src = "./img/maximize-2.svg";
-            imgResize.style.height = "30px";
-            imgResize.style.width = "30px";
+            imgResize.style.height = "20px";
+            imgResize.style.width = "20px";
 
             let btnResize = document.createElement('button');
             btnResize.id = "btnResize"+this.Ident;
-            btnResize.style.height = "30px";
-            btnResize.style.width = "30px";
+            btnResize.style.height = "20px";
+            btnResize.style.width = "20px";
             btnResize.style.border = "none";
             btnResize.style.backgroundColor = this.CouleurFond;
             btnResize.style.marginLeft = "5px";
@@ -139,8 +145,8 @@ class postit{
                 var startX, startY, startWidth, startHeight;
 
                 function initDrag(e){
-                    startX = e.clientX;
-                    startY = e.clientY;
+                    startX = mouseX;
+                    startY = mouseY;
                     startWidth = parseInt(containPost.style.width);
                     startHeight = parseInt(containPost.style.height);
                     btnResize.addEventListener('drag', drag);
@@ -149,9 +155,9 @@ class postit{
                 }
 
                 function drag(e){
-                    containPost.style.width = startWidth + (e.clientX - startX) + 'px';
-                    containPost.style.height = startHeight + (e.clientY - startY) + 'px';
-                    console.log('x: ',startX, startWidth, e.clientX, 'y: ',startY, startWidth, e.clientY, 'long: ',containPost.style.width, 'larg: ', containPost.style.height);
+                    //console.log(e);
+                    containPost.style.width = startWidth + (mouseX - startX) + 'px';
+                    containPost.style.height = startHeight + (mouseY - startY) + 'px';
                 }
 
                 function stopDrag(){
@@ -160,43 +166,50 @@ class postit{
                     console.log(startY);               
                 }
                 
-            //Creation du bouton edit
-            let imgEdit = document.createElement('img');
-            imgEdit.src = "./img/edit.svg";
-            imgEdit.style.height = "30px";
-            imgEdit.style.width = "30px";
+            //Creation du bouton Zup
+            let imgZup = document.createElement('img');
+            imgZup.src = "./img/chevrons-up.svg";
+            imgZup.style.height = "20px";
+            imgZup.style.width = "20px";
 
-            let btnEdit = document.createElement('button');
-            btnEdit.style.height = "30px";
-            btnEdit.style.width = "30px";
-            btnEdit.style.border = "none";
-            btnEdit.style.backgroundColor = this.CouleurFond;
-            btnEdit.style.marginLeft = "5px";
+            let btnZup = document.createElement('button');
+            btnZup.style.height = "20px";
+            btnZup.style.width = "20px";
+            btnZup.style.border = "none";
+            btnZup.style.backgroundColor = this.CouleurFond;
+            btnZup.style.marginLeft = "5px";
+            btnZup.addEventListener('click', function(){
+                containPost.style.zIndex++;
+            })
 
-            //Creation du bouton axeZ
-            let imgZidx = document.createElement('img');
-            imgZidx.src = "./img/layers.svg";
-            imgZidx.style.height = "30px";
-            imgZidx.style.width = "30px";
+            //Creation du bouton Zdown
+            let imgZdown = document.createElement('img');
+            imgZdown.src = "./img/chevrons-down.svg";
+            imgZdown.style.height = "20px";
+            imgZdown.style.width = "20px";
 
-            let btnZidx = document.createElement('button');
-            btnZidx.style.height = "30px";
-            btnZidx.style.width = "30px";
-            btnZidx.style.border = "none";
-            btnZidx.style.backgroundColor = this.CouleurFond;
-            btnZidx.style.marginLeft = "5px";
+            let btnZdown = document.createElement('button');
+            btnZdown.style.height = "20px";
+            btnZdown.style.width = "20px";
+            btnZdown.style.border = "none";
+            btnZdown.style.backgroundColor = this.CouleurFond;
+            btnZdown.style.marginLeft = "5px";
+            btnZdown.addEventListener('click', function(){
+                containPost.style.zIndex--;
+            })
+
 
             //Ajout des éléments créés au DOM
             btnMove.appendChild(imgMove);
             btnDel.appendChild(imgDel);
             btnResize.appendChild(imgResize);
-            btnEdit.appendChild(imgEdit);
-            btnZidx.appendChild(imgZidx);
+            btnZup.appendChild(imgZup);
+            btnZdown.appendChild(imgZdown);
             contButon.appendChild(btnMove);
             contButon.appendChild(btnDel);
             contButon.appendChild(btnResize);
-            contButon.appendChild(btnEdit);
-            contButon.appendChild(btnZidx);
+            contButon.appendChild(btnZup);
+            contButon.appendChild(btnZdown);
             containPost.appendChild(contButon);
             containPost.appendChild(pPostit);
         }
