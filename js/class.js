@@ -26,7 +26,7 @@ class postit{
         
         let divContainer = document.getElementById('contPost');
         let containPost = document.getElementById('postit'+parseInt(this.Ident));
-    
+
         if(containPost === null){
             
             containPost = document.createElement('div');
@@ -145,19 +145,19 @@ class postit{
                     startHeight = parseInt(containPost.style.height);
                     btnResize.addEventListener('drag', drag);
                     btnResize.addEventListener('dragend', stopDrag);
-                    console.log(parseInt(containPost.style.height),parseInt(containPost.style.width));
+                    console.log(startY);
                 }
 
                 function drag(e){
                     containPost.style.width = startWidth + (e.clientX - startX) + 'px';
                     containPost.style.height = startHeight + (e.clientY - startY) + 'px';
-                    console.log(containPost.style.height);
+                    console.log('x: ',startX, startWidth, e.clientX, 'y: ',startY, startWidth, e.clientY, 'long: ',containPost.style.width, 'larg: ', containPost.style.height);
                 }
 
                 function stopDrag(){
                     btnResize.removeEventListener('drag', drag);
                     btnResize.removeEventListener('dragend', stopDrag);
-                    console.log(parseInt(containPost.style.height),parseInt(containPost.style.width));
+                    console.log(startY);               
                 }
                 
             //Creation du bouton edit
