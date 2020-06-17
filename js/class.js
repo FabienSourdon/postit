@@ -82,15 +82,15 @@ class postit{
                 btnMove.addEventListener('dragstart', function(e){
                     isDown = true;
                     offset = [
-                        containPost.offsetLeft - mouseX,
-                        containPost.offsetTop - mouseY
+                        containPost.offsetLeft - e.clientX,
+                        containPost.offsetTop - e.clientY
                     ];
                 });
 
                 btnMove.addEventListener('dragend', function() {
                     isDown = false;
-                    containPost.posX = containPost.style.left ;
-                    containPost.posY = containPost.style.top ;
+                    containPost.PosX = containPost.style.left ;
+                    containPost.PosY = containPost.style.top ;
                 });
 
                 btnMove.addEventListener('drag', function(event) {
@@ -105,9 +105,6 @@ class postit{
                         containPost.style.left = (mousePosition.x + offset[0]) + 'px';
                         containPost.style.top  = (mousePosition.y + offset[1]) + 'px';
                         }
-                
-                    
-                console.log('x: ',offset[0], mousePosition.x, event.clientX, 'y: ',offset[1], mousePosition.y, event.clientY, 'long: ',containPost.style.left, 'larg: ', containPost.style.top);
                 });
 
             //Creation du bouton delete
@@ -145,8 +142,8 @@ class postit{
                 var startX, startY, startWidth, startHeight;
 
                 function initDrag(e){
-                    startX = mouseX;
-                    startY = mouseY;
+                    startX = e.clientX;
+                    startY = e.clientY;
                     startWidth = parseInt(containPost.style.width);
                     startHeight = parseInt(containPost.style.height);
                     btnResize.addEventListener('drag', drag);
